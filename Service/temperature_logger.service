@@ -1,0 +1,16 @@
+[Unit]
+Description=Temperature Logger
+After=network-online.target
+
+[Service]
+Type=simple
+User=alarm
+Group=alarm
+WorkingDirectory=/home/alarm/TemperatureLogger
+Environment="PYTHONPATH=/home/alarm/quick2wire"
+ExecStart=/usr/bin/python temperature_logger.py --logfile temperature_logger.log --keyfile /home/alarm/pwcryptkey.txt
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
